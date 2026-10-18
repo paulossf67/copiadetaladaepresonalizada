@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy Assistant Pro - Sistema Profissional de Cópia</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <i class="fas fa-copy"></i>
+                <span>Copy Assistant Pro</span>
+            </div>
+            <div class="navbar-info">
+                <div class="system-stats">
+                    <span id="cpu-usage">CPU: --</span>
+                    <span id="memory-usage">MEM: --</span>
+                    <span id="disk-usage">DISK: --</span>
+                </div>
+            </div>
+        </nav>
+
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-menu">
+                    <button class="menu-item active" data-tab="copy">
+                        <i class="fas fa-files"></i>
+                        <span>Copiar Arquivos</span>
+                    </button>
+                    <button class="menu-item" data-tab="recovery">
+                        <i class="fas fa-wrench"></i>
+                        <span>Acesso a Arquivos</span>
+                    </button>
+                    <button class="menu-item" data-tab="history">
+                        <i class="fas fa-history"></i>
+                        <span>Histórico</span>
+                    </button>
+                    <button class="menu-item" data-tab="settings">
+                        <i class="fas fa-cog"></i>
+                        <span>Configurações</span>
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Content Area -->
+            <main class="content">
+                <!-- TAB: COPIAR ARQUIVOS -->
+                <section id="copy" class="tab-content active">
+                    <div class="section-header">
+                        <h1>Copiar Arquivos e Pastas</h1>
+                        <p>Selecione a origem e o destino para iniciar a cópia</p>
+                    </div>
+
+                    <div class="copy-form">
+                        <div class="form-group">
+                            <label for="source">
+                                <i class="fas fa-folder-open"></i> Caminho de Origem
+                            </label>
+                            <div class="input-group">
+                                <input type="text" id="source" placeholder="C:\Users\...\Documentos" autocomplete="off">
+                                <button class="btn-browse" id="btn-browse-source">
+                                    <i class="fas fa-folder"></i> Procurar
+                                </button>
+                            </div>
+                            <div id="source-info" class="path-info"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="destination">
+                                <i class="fas fa-folder-check"></i> Caminho de Destino
+                            </label>
+                            <div class="input-group">
+                                <input type="text" id="destination" placeholder="C:\Backup\..." autocomplete="off">
+                                <button class="btn-browse" id="btn-browse-dest">
+                                    <i class="fas fa-folder"></i> Procurar
+                                </button>
+                            </div>
+                            <div id="dest-info" class="path-info"></div>
+                        </div>
+
+                        <button id="btn-start-copy" class="btn btn-primary btn-large">
+                            <i class="fas fa-play"></i> Iniciar Cópia
+                        </button>
+                    </div>
+
+                    <!-- Progress Section -->
+                    <div id="progress-section" class="progress-section hidden">
+                        <div class="progress-card">
+                            <h3>Progresso da Cópia</h3>
+
+                            <div class="current-file">
+                                <span class="label">Arquivo Atual:</span>
+                                <span id="current-file-name">--</span>
+                            </div>
+
+                            <div class="progress-bar-container">
+                                <div class="progress-bar">
+                                    <div id="progress-fill" class="progress-fill"></div>
+                                </div>
+                                <span id="progress-percent">0%</span>
+                            </div>
+
+                            <div class="stats-grid">
+                                <div class="stat-box">
+                                    <span class="stat-label">Arquivos Copiados</span>
+                                    <span id="files-copied" class="stat-value">0/0</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-label">Tamanho Copiado</span>
+                                    <span id="size-copied" class="stat-value">0 MB</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-label">Velocidade</span>
+                                    <span id="copy-speed" class="stat-value">0 MB/s</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-label">Tempo Decorrido</span>
+                                    <span id="elapsed-time" class="stat-value">0s</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Completion Section -->
+                    <div id="completion-section" class="completion-section hidden">
+                        <div class="completion-card success">
+                            <div class="completion-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h2 id="completion-title">Cópia Concluída com Sucesso!</h2>
+
+                            <div class="completion-stats">
+                                <div class="stat">
+                                    <span class="label">Total de Arquivos:</span>
+                                    <span id="final-files" class="value">--</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="label">Arquivos com Erro:</span>
+                                    <span id="final-failed-files" class="value">0</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="label">Tamanho Total:</span>
+                                    <span id="final-size" class="value">--</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="label">Tempo Total:</span>
+                                    <span id="final-time" class="value">--</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="label">Velocidade Média:</span>
+                                    <span id="final-speed" class="value">--</span>
+                                </div>
+                            </div>
+
+                            <div class="file-types-section">
+                                <h4>Tipos de Arquivo Copiados:</h4>
+                                <div id="file-types" class="file-types-grid"></div>
+                            </div>
+
+                            <button id="btn-new-copy" class="btn btn-primary">
+                                <i class="fas fa-repeat"></i> Nova Cópia
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB: RECUPERAÇÃO -->
+                <section id="recovery" class="tab-content">
+                    <div class="section-header">
+                        <h1>Acesso a Arquivos</h1>
+                        <p>Verifique se um arquivo pode ser lido por completo</p>
+                    </div>
+
+                    <div class="recovery-form">
+                        <div class="form-group">
+                            <label for="recovery-file">
+                                <i class="fas fa-file-medical"></i> Arquivo para Verificar
+                            </label>
+                            <div class="input-group">
+                                <input type="text" id="recovery-file" placeholder="C:\Users\...\arquivo.txt">
+                                <button class="btn-browse" id="btn-browse-recovery">
+                                    <i class="fas fa-folder"></i> Procurar
+                                </button>
+                            </div>
+                        </div>
+
+                        <button id="btn-check-file" class="btn btn-primary btn-large">
+                            <i class="fas fa-stethoscope"></i> Verificar Leitura
+                        </button>
+                    </div>
+
+                    <div id="recovery-result" class="recovery-result hidden">
+                        <div id="recovery-card" class="card"></div>
+                    </div>
+                </section>
+
+                <!-- TAB: HISTÓRICO -->
+                <section id="history" class="tab-content">
+                    <div class="section-header">
+                        <h1>Histórico de Operações</h1>
+                        <p>Visualize todas as cópias realizadas</p>
+                    </div>
+
+                    <div id="history-list" class="history-list">
+                        <div class="empty-state">
+                            <i class="fas fa-inbox"></i>
+                            <p>Nenhuma operação registrada ainda</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB: CONFIGURAÇÕES -->
+                <section id="settings" class="tab-content">
+                    <div class="section-header">
+                        <h1>Configurações</h1>
+                        <p>Personalize o comportamento da aplicação</p>
+                    </div>
+
+                    <div class="settings-form">
+                        <div class="setting-group">
+                            <h3>Notificações</h3>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="notify-completion" checked>
+                                <span>Notificar ao concluir cópia</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="notify-errors" checked>
+                                <span>Notificar erros durante cópia</span>
+                            </label>
+                        </div>
+
+                        <div class="setting-group">
+                            <h3>Comportamento</h3>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="preserve-timestamps" checked>
+                                <span>Preservar data/hora dos arquivos</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="auto-clear" checked>
+                                <span>Limpar formulário após cópia</span>
+                            </label>
+                        </div>
+
+                        <div class="setting-group">
+                            <h3>Interface</h3>
+                            <label>Tema</label>
+                            <select id="theme-select">
+                                <option value="light">Claro</option>
+                                <option value="dark">Escuro</option>
+                                <option value="auto">Automático</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-success">
+                            <i class="fas fa-save"></i> Salvar Configurações
+                        </button>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

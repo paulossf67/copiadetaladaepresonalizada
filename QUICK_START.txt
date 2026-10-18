@@ -1,0 +1,105 @@
+╔═══════════════════════════════════════════════════════╗
+║   COPY ASSISTANT PRO - GUIA RÁPIDO DE INÍCIO          ║
+╚═══════════════════════════════════════════════════════╝
+
+🎯 COMO EXECUTAR:
+
+OPÇÃO 1 - Duplo clique em "run.bat"
+├─ A aplicação será iniciada automaticamente
+└─ As dependências serão verificadas na primeira execução
+
+OPÇÃO 2 - Linha de comando
+├─ Abra o PowerShell/CMD na pasta do projeto
+├─ Digite: python main.py
+└─ Pressione Enter
+
+🛠️ PRIMEIRA EXECUÇÃO:
+
+1. Se for a primeira vez, pode demorar alguns segundos
+2. A aplicação PyQt6 será carregada
+3. Uma janela "Copy Assistant Pro" abrirá
+
+📋 FUNCIONALIDADES:
+
+Aba 1: Copiar Arquivos
+├─ Selecione origem e destino
+├─ Clique "Procurar" para usar file browser do Windows
+├─ Acompanhe o progresso em tempo real
+└─ Veja relatório detalhado ao concluir
+
+Aba 2: Verificar Acesso
+├─ Verifique se um arquivo pode ser lido
+├─ Teste permissões de leitura
+└─ Identifique arquivos inacessíveis
+
+Aba 3: Histórico
+├─ Veja todas as operações realizadas
+├─ Data, hora, origem, destino
+└─ Estatísticas de velocidade e tamanho
+
+Aba 4: Configurações
+├─ Notificações (ativar/desativar)
+├─ Limpar formulário automaticamente
+├─ Tema claro/escuro
+└─ Salvar preferências
+
+⚡ NAVBAR (Topo)
+
+├─ CPU: Uso do processador em tempo real
+├─ MEM: Memória RAM em uso
+└─ DISK: Espaço em disco utilizado
+
+❓ PROBLEMAS?
+
+Se a aplicação não iniciar:
+┌─────────────────────────────────┐
+│ Solução 1: Verificar Python      │
+│ └─ Abra CMD e digite:            │
+│    python --version              │
+│    Deve ser 3.10 ou superior     │
+├─────────────────────────────────┤
+│ Solução 2: Reinstalar deps       │
+│ └─ Execute no CMD:               │
+│    pip install -r requirements.txt
+│    --force-reinstall             │
+├─────────────────────────────────┤
+│ Solução 3: Executar via CMD      │
+│ └─ Para ver mensagens de erro:   │
+│    cd F:\Python\copiadetaladaepresonalizada
+│    python main.py                │
+└─────────────────────────────────┘
+
+📁 ARQUIVOS DO PROJETO:
+
+main.py               ← Interface PyQt6 (Desktop)
+copy_service.py      ← Lógica de cópia
+requirements.txt     ← Dependências
+config.json         ← Suas configurações
+history.json        ← Histórico de operações
+run.bat             ← Executável Windows
+
+💾 DADOS SALVOS:
+
+config.json
+├─ Tema selecionado
+├─ Preferências de notificação
+└─ Configurações de comportamento
+
+history.json
+├─ Todas as operações realizadas
+├─ Data/hora de cada cópia
+└─ Estatísticas (velocidade, tamanho)
+
+🚀 DICAS:
+
+1. Use "Procurar" para evitar erros de digitação
+2. A app não trava durante cópia (operação em thread)
+3. Histórico é salvo automaticamente
+4. Configurações são persistentes
+5. Tema segue Windows se "Automático" (Claro/Escuro)
+
+═════════════════════════════════════════════════════════
+
+Desenvolvido com PyQt6 para Windows
+
+Versão 2.0 - Desktop Edition
